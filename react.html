@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class = "scene" id = "scene">
+    
+</div>
+
+<script>
+    const scene = document.getElementById('scene');
+    const pullSwitch = document.getElementById('pullSwitch');
+    const hintText = document.getElementById('hintText');
+
+    let isOn = false;
+    let animating = false;
+    
+    pullSwitch.addEventListener('click', () => {
+        if (animating) return;
+        animating = true;
+        
+        pullSwitch.classList.add('pulling');
+        isOn = !isOn;
+        pullSwitch.setAttribute('aria-pressed', String(isOn));
+        hintText.textContent = isOn ? 'Pull again to switch off' : 'pull the cord to switch on';
+
+        window.setTimeout(() => {
+            scene.classList.toggle('isOn', isOn);
+        }, 150);
+
+         window.setTimeout(() => {
+            pullSwitch.classList.remove('pulling');
+            animating = false;
+        }, 560);
+    });
+
+</script>
+   
+
+</body>
+</html>
